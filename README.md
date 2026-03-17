@@ -12,7 +12,7 @@ A minimal CLI demo showing how to connect [Prediction Guard's Responses API](htt
 
 - Python 3.12+
 - [`uv`](https://docs.astral.sh/uv/getting-started/installation/) (package manager)
-- A Prediction Guard API key → [get one here](https://predictionguard.com)
+- A Prediction Guard API key
 
 ## Setup
 
