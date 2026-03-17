@@ -5,7 +5,5 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "ipykernel>=7.2.0",
     "predictionguard>=2.11.0",
-    "python-dotenv>=1.2.2",
 ]

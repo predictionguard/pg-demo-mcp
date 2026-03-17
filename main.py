@@ -1,19 +1,25 @@
 from predictionguard import PredictionGuard
-from dotenv import load_dotenv
-
-# load environment variables (make sure that PREDICTIONGUARD_API_KEY is set in the .env file)
-load_dotenv()
+from getpass import getpass
+import os
 
 def main():
     ## Initialize PredictionGuard Client
-    
-    client = PredictionGuard()
+    PREDICTIONGUARD_API_KEY=getpass("Enter your PredictionGuard API key: ")
+    if not PREDICTIONGUARD_API_KEY:
+        PREDICTIONGUARD_API_KEY = os.getenv("PREDICTIONGUARD_API_KEY")
 
+    PREDICTIONGUARD_URL=input("Enter your PredictionGuard URL (press Enter for default https://api.predictionguard.com): ").strip() or "https://api.predictionguard.com"
+
+    client = PredictionGuard(api_key=PREDICTIONGUARD_API_KEY, url=PREDICTIONGUARD_URL)
+
+    # MCP URL 
+    mcp_url = "Enter Demo MCP URL here"
+    
     ## Set up MCP JSON
     sf_tools_json = [
         {
             "type": "mcp",
-            "server_url": "https://<MCP_SERVER_URL>.us-central1.run.app/mcp",
+            "server_url": mcp_url,
             "server_label": "pg-salesforce-demo",
             "allowed_tools": [
             "execute_sf_query",
@@ -49,10 +55,11 @@ def main():
 
         conversation.append({"role": "user", "content": user_input})
 
+        ## Call PG Model (gpt-oss-120b) with MCP tools
         response = client.responses.create(
             model="gpt-oss-120b",
             input=conversation,
-            tools=sf_tools_json,
+            tools=sf_tools_json, # <<< -- this is where we pass the tools to the model
         )
 
         # Extract reply text from the response output item
