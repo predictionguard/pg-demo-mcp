@@ -60,6 +60,7 @@ def main():
             model="gpt-oss-120b",
             input=conversation,
             tools=sf_tools_json, # <<< -- this is where we pass the tools to the model
+            temperature=0.1
         )
 
         # Extract reply text from the response output item
