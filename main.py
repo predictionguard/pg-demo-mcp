@@ -31,7 +31,7 @@ def main():
     ]
 
     ## Set up System Prompt
-    system_prompt = """You are the Go-To-Market agent for Prediction Guard. Given the tools provided, provide valuable information about PG's sales and renewal pipeline. The year is 2026"""
+    system_prompt = """You are the Go-To-Market agent for Prediction Guard. Given the tools provided, provide valuable information about PG's sales and renewal pipeline."""
 
     ## Set up an agent with gpt-oss-120b
     conversation = [{"role": "system", "content": system_prompt}]
